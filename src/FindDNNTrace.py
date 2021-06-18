@@ -29,8 +29,8 @@ if __name__ == "__main__":
         number_of_layer, number_of_neurons_each_layer, weight, bias = input_processing_json(
             filename)
     elif input_mode == 'onnx':
-        number_of_layer, number_of_neurons_each_layer, weight, bias = input_processing_onnx(
-            filename)
+        number_of_layer, number_of_neurons_each_layer, weight, bias = \
+            input_processing_onnx(filename)
     number_of_rule = number_of_neurons_each_layer[-1]
     model = createModel(
         number_of_layer, number_of_neurons_each_layer, weight, bias)
@@ -65,9 +65,10 @@ if __name__ == "__main__":
                 cnt += 1
         # checker_tool()
         # exit()
+        print('X1', X)
         previous_layer_implication(
             X, weight, bias, number_of_layer, number_of_neurons_each_layer)
-
+        print('X2', X)
         print("Each layer to the final output")
         for layer in range(1, number_of_layer - 1):
             print("Layer: " + str(layer))
@@ -75,6 +76,9 @@ if __name__ == "__main__":
             names = get_neuron_name_of_layer(
                 layer, number_of_layer, number_of_neurons_each_layer)
             print('names', names)
+            print('numer of neurons each layer', number_of_neurons_each_layer)
+            print(len(local_X), local_X)
+
             for rule in range(number_of_neurons_each_layer[-1]):
                 print("Rule: " + str(rule))
                 Y = getY_implication_for_final_layer(
